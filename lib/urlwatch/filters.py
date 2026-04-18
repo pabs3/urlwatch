@@ -848,6 +848,42 @@ class RegexSub(FilterBase):
         return re.sub(subfilter['pattern'], subfilter.get('repl', ''), data)
 
 
+class Prefix(FilterBase):
+    """Prefix with some text"""
+
+    __kind__ = 'text'
+
+    __supported_subfilters__ = {
+        'text': 'Text to add to the start',
+    }
+
+    __default_subfilter__ = 'text'
+
+    def filter(self, data, subfilter):
+        if 'text' not in subfilter:
+            raise ValueError('{} needs some text'.format(self.__kind__))
+
+        return subfilter['text'] + data
+
+
+class Suffix(FilterBase):
+    """Suffix with some text"""
+
+    __kind__ = 'text'
+
+    __supported_subfilters__ = {
+        'text': 'Text to add to the end',
+    }
+
+    __default_subfilter__ = 'text'
+
+    def filter(self, data, subfilter):
+        if 'text' not in subfilter:
+            raise ValueError('{} needs some text'.format(self.__kind__))
+
+        return data + subfilter['text']
+
+
 class RegexFindall(FilterBase):
     """Pick out regular expressions using Python's re.findall"""
 
