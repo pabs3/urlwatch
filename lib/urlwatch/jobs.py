@@ -205,7 +205,7 @@ class JobBase(object, metaclass=TrackSubClasses):
 
 class Job(JobBase):
     __required__ = ()
-    __optional__ = ('name', 'filter', 'max_tries', 'diff_tool', 'compared_versions', 'diff_filter', 'enabled', 'user_visible_url', 'tags')
+    __optional__ = ('name', 'comment', 'filter', 'max_tries', 'diff_tool', 'compared_versions', 'diff_filter', 'enabled', 'user_visible_url', 'tags')
 
     def matching_tags(self, tags: Iterable[str]) -> Set[str]:
         return self.tags.intersection(tags)

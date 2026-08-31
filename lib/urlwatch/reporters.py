@@ -244,6 +244,9 @@ class HtmlReporter(ReporterBase):
                                          location=job.get_location(),
                                          pretty_name=job.pretty_name())
 
+            if job.comment is not None:
+                yield SafeHtml('<p>{comment}</p>').format(comment=job.comment)
+
             content = self._format_content(job_state, cfg['diff'], cfg['report_new'])
             if content is not None:
                 yield content
@@ -371,7 +374,14 @@ class TextReporter(ReporterBase):
         summary_part.append(pretty_summary)
 
         sep = (line_length * '-') or None
-        details_part.extend((sep, summary, sep))
+        details_part.extend((sep, summary))
+
+        comment = job_state.job.comment
+        if comment is not None:
+            details_part.extend((sep, comment))
+
+        details_part.append(sep)
+
         if content is not None:
             details_part.extend((content, sep))
         details_part.extend(('', '') if sep else ('',))
@@ -1014,7 +1024,11 @@ class MarkdownReporter(ReporterBase):
         summary_part.append(pretty_summary)
 
         if content is not None:
-            details_part.append(('### ' + summary, content))
+            comment = job_state.job.comment
+            if comment is not None:
+                details_part.append(('### ' + summary + '\n' + comment, content))
+            else:
+                details_part.append(('### ' + summary, content))
 
         return summary_part, details_part
 

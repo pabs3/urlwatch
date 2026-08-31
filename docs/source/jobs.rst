@@ -174,6 +174,7 @@ Optional keys for all job types
 -------------------------------
 
 - ``name``: Human-readable name/label of the job
+- ``comment``: ``text``, ``html`` and ``markdown`` reporters show it between job header and output; could be a reminder of what to do next etc.
 - ``tags``: Array of tags, or a single tag as a string
 - ``filter``: :doc:`filters` (if any) to apply to the output (can be tested with ``--test-filter``)
 - ``max_tries``: After this many sequential failed runs, the error will be reported rather than ignored

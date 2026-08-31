@@ -2,6 +2,7 @@
 
 # A basic URL job just needs a URL
 name: "urlwatch webpage"
+comment: "the latest urlwatch release is"
 url: "https://thp.io/2008/urlwatch/"
 # You can use a pre-supplied filter for this, here we apply two:
 # the html2text filter that converts the HTML to plaintext and
